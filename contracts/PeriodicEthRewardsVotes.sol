@@ -273,7 +273,7 @@ contract PeriodicEthRewardsVotes is ERC20, Ownable, ReentrancyGuard, ERC20Votes 
       lastClaimed[_claimer] = block.timestamp;
 
       // send ETH to the claimer
-      (bool _success, ) = payable(_claimer).call{value: _ethToClaim}("");
+      (bool _success, ) = _claimer.call{value: _ethToClaim}("");
       require(_success, "ETH transfer failed");
 
       emit Claim(msg.sender, _claimer, _ethToClaim);
